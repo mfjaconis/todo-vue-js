@@ -1,4 +1,22 @@
 <script setup>
+import { reactive } from 'vue';
+
+const estado = reactive({
+    tarefas: [
+        {
+            titulo: 'Estudar ES6',
+            finalizada: false
+        },
+        {
+            titulo: 'Estudar SASS',
+            finalizada: false
+        },
+        {
+            titulo: 'Ir para academia',
+            finalizada: true
+        }
+    ]
+})
 
 </script>
 
@@ -28,10 +46,10 @@
             </div>
         </form>
         <ul class="list-group mt-4">
-            <li class="list-group-item">
-                <input type="checkbox">
-                <label class="ms-3" for="">
-                    Estudar ES6
+            <li class="list-group-item" v-for="tarefa in estado.tarefas">
+                <input :checked="tarefa.finalizada" :id="tarefa.titulo" type="checkbox">
+                <label class="ms-3" :for="tarefa.titulo">
+                    {{ tarefa.titulo }}
                 </label>
             </li>
         </ul>
