@@ -2,6 +2,7 @@
 import { reactive } from 'vue';
 
 const estado = reactive({
+    filtro: 'todas',
     tarefas: [
         {
             titulo: 'Estudar ES6',
@@ -22,6 +23,15 @@ const getTarefasPendentes = () => {
     return estado.tarefas.filter(tarefa => !tarefa.finalizada)
 }
 
+const getTarefasFiltradas = () => {
+    const { filtro } = estado;
+
+    switch (filtro) {
+        case 'pendentes':
+            getTarefasPendentes();
+
+    }
+}
 </script>
 
 <template>
@@ -41,7 +51,7 @@ const getTarefasPendentes = () => {
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
                 </div>
                 <div class="col-md-2">
-                    <select class="form-control">
+                    <select @change="evento => estado.filtro = evento.target.value" class="form-control">
                         <option value="todas">Todas tarefas</option>
                         <option value="pendentes">pendentes</option>
                         <option value="finalizadas">Finalizadas</option>
