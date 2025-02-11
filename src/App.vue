@@ -52,6 +52,7 @@ const cadastrarTarefa = () => {
     }
 
     estado.tarefas.push(tarefaNova)
+    estado.tarefaTemp = ''
 }
 
 </script>
@@ -67,8 +68,8 @@ const cadastrarTarefa = () => {
         <form @submit.prevent="cadastrarTarefa">
             <div class="row">
                 <div class="col">
-                    <input @change="evento => estado.tarefaTemp = evento.target.value" required type="text"
-                        placeholder="Digite aqui a descrição da tarefa" class="form-control">
+                    <input :value="estado.tarefaTemp" @change="evento => estado.tarefaTemp = evento.target.value"
+                        required type="text" placeholder="Digite aqui a descrição da tarefa" class="form-control">
                 </div>
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
