@@ -48,7 +48,7 @@ const estado = reactive({
         <ul class="list-group mt-4">
             <li class="list-group-item" v-for="tarefa in estado.tarefas">
                 <input :checked="tarefa.finalizada" :id="tarefa.titulo" type="checkbox">
-                <label class="ms-3" :for="tarefa.titulo">
+                <label :class="{ done: tarefa.finalizada }" class="ms-3" :for="tarefa.titulo">
                     {{ tarefa.titulo }}
                 </label>
             </li>
@@ -56,4 +56,8 @@ const estado = reactive({
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.done {
+    text-decoration: line-through;
+}
+</style>
