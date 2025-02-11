@@ -23,13 +23,22 @@ const getTarefasPendentes = () => {
     return estado.tarefas.filter(tarefa => !tarefa.finalizada)
 }
 
+const getTarefasFinalizadas = () => {
+    return estado.tarefas.filter(tarefa => tarefa.finalizada)
+}
+
+
 const getTarefasFiltradas = () => {
     const { filtro } = estado;
 
     switch (filtro) {
         case 'pendentes':
-            getTarefasPendentes();
+            return getTarefasPendentes();
 
+        case 'finalizadas':
+            return getTarefasFinalizadas();
+        default:
+            return estado.tarefas;
     }
 }
 </script>
@@ -60,7 +69,7 @@ const getTarefasFiltradas = () => {
             </div>
         </form>
         <ul class="list-group mt-4">
-            <li class="list-group-item" v-for="tarefa in estado.tarefas">
+            <li class="list-group-item" v-for="tarefa in getTarefasFiltradas()">
                 <input :checked="tarefa.finalizada" :id="tarefa.titulo" type="checkbox">
                 <label :class="{ done: tarefa.finalizada }" class="ms-3" :for="tarefa.titulo">
                     {{ tarefa.titulo }}
